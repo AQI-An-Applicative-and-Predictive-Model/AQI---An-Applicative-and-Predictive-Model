@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQI Result</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:radial-gradient(circle at top,#1e293b,#0f172a);
+  color:#fff;
+  text-align:center;
+}
+
+.container{
+  width:90%;
+  margin:auto;
+  padding:20px;
+}
+
+/* HEADER */
+.header h1{
+  font-size:36px;
+  margin:5px;
+}
+.header p{
+  color:#94a3b8;
+}
+
+/* SEARCH */
+.search-box{
+  margin:15px auto;
+  padding:12px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(10px);
+  border-radius:12px;
+  width:fit-content;
+}
+
+.search-box form{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.search-box input{
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:rgba(255,255,255,0.15);
+  color:#fff;
+}
+
+.search-box input[type="date"]{
+  cursor:pointer;
+}
+
+.search-box button{
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(135deg,#38bdf8,#06b6d4);
+  color:#000;
+  cursor:pointer;
+}
+
+/* AQI CARD */
+.aqi-card{
+  margin:25px auto;
+  padding:30px;
+  width:300px;
+  border-radius:20px;
+  color:black;
+}
+
+.aqi-card h1{
+  font-size:60px;
+  margin:0;
+}
+
+/* DATE BOX */
+.date-box{
+  margin:10px auto;
+  padding:10px 20px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#38bdf8,#06b6d4);
+  color:black;
+  font-weight:bold;
+  display:inline-block;
+}
+
+/* PROMINENT POLLUTANTS */
+.primary-box{
+  margin:15px auto;
+  padding:12px 20px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#facc15,#f97316);
+  color:black;
+  font-weight:bold;
+  display:inline-block;
+  box-shadow:0 8px 20px rgba(250,204,21,0.3);
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:20px;
+  margin-top:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.07);
+  backdrop-filter:blur(10px);
+  border-radius:16px;
+  padding:15px;
+}
+
+.pollutant{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.graph{
+  background:#fff;
+  border-radius:16px;
+  padding:15px;
+}
+
+.tip{
+  margin-top:15px;
+  font-size:14px;
+  color:#cbd5f5;
+}
+
+button.back{
+  margin-top:25px;
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(135deg,#38bdf8,#06b6d4);
+  color:#000;
+  cursor:pointer;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1 id="city">City Name</h1>
+    <p>Air Quality Dashboard</p>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-box">
+    <form onsubmit="handleSearch(event)">
+      <input type="text" id="cityInput" placeholder="Enter city..." required>
+      <input type="date" id="dateInput" required>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <!-- AQI -->
+  <div class="aqi-card" id="aqiBox">
+    <h1 id="aqi">0</h1>
+    <div id="status">--</div>
+  </div>
+
+  <!-- DATE -->
+  <div class="date-box">
+    📅 Selected Date: <b id="selectedDate">--</b>
+  </div>
+
+  <!-- PROMINENT POLLUTANTS -->
+  <div class="primary-box">
+    🌫️ Prominent Pollutants: <b>PM10 • PM2.5 • Ozone</b>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid">
+
+    <!-- POLLUTANTS -->
+    <div class="card">
+      <div class="pollutant"><b>PM10</b><span id="pm10">--</span></div>
+      <div class="pollutant"><b>PM2.5</b><span id="pm25">--</span></div>
+      <div class="pollutant"><b>Ozone</b><span id="ozone">--</span></div>
+
+      <div class="tip" id="tip">Health Tip: --</div>
+    </div>
+
+    <!-- GRAPH -->
+    <div class="graph">
+      <h3 style="color:black">AQI Trend</h3>
+      <canvas id="chart"></canvas>
+    </div>
+
+  </div>
+
+  <button class="back" onclick="history.back()">← Back</button>
+
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const city = params.get("city");
+const date = params.get("date");
+
+document.getElementById("city").innerText = city || "City";
+if(city) document.getElementById("cityInput").value = city;
+
+/* FORMAT DATE */
+function formatDate(d){
+  const dt = new Date(d);
+  return dt.getDate() + " " +
+    dt.toLocaleString('default',{month:'long'}) + " " +
+    dt.getFullYear();
+}
+
+/* SET DATE */
+if(date){
+  document.getElementById("selectedDate").innerText = formatDate(date);
+  document.getElementById("dateInput").value = date;
+}else{
+  let today = new Date().toISOString().split("T")[0];
+  document.getElementById("selectedDate").innerText = formatDate(today);
+}
+
+/* SEARCH */
+function handleSearch(e){
+  e.preventDefault();
+  const city = document.getElementById("cityInput").value;
+  const date = document.getElementById("dateInput").value;
+  window.location.href = `aqi-result.html?city=${city}&date=${date}`;
+}
+
+/* DATA */
+let aqi = Math.floor(Math.random()*300)+50;
+
+document.getElementById("pm10").innerText = Math.floor(Math.random()*200);
+document.getElementById("pm25").innerText = Math.floor(Math.random()*150);
+document.getElementById("ozone").innerText = Math.floor(Math.random()*100);
+
+/* AQI ANIMATION */
+let i=0;
+let interval=setInterval(()=>{
+  if(i>=aqi) clearInterval(interval);
+  document.getElementById("aqi").innerText=i;
+  i+=5;
+},15);
+
+/* STATUS */
+let box=document.getElementById("aqiBox");
+let status=document.getElementById("status");
+let tip=document.getElementById("tip");
+
+if(aqi<=100){
+  box.style.background="#22c55e";
+  status.innerText="Good";
+  tip.innerText="Air is clean and safe.";
+}
+else if(aqi<=200){
+  box.style.background="#facc15";
+  status.innerText="Moderate";
+  tip.innerText="Sensitive people should be careful.";
+}
+else{
+  box.style.background="#ef4444";
+  status.innerText="Poor";
+  tip.innerText="Avoid outdoor activities.";
+}
+
+/* GRAPH */
+new Chart(document.getElementById("chart"),{
+  type:'line',
+  data:{
+    labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+    datasets:[{
+      data:[90,120,110,140,150,130,aqi],
+      borderColor:"#06b6d4",
+      fill:true,
+      backgroundColor:"rgba(6,182,212,0.2)",
+      tension:0.4
+    }]
+  },
+  options:{
+    plugins:{legend:{display:false}}
+  }
+});
+</script>
+
+</body>
+</html>
