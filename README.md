@@ -3,6 +3,13 @@
 
 Capstone Project | Group 188 | IIT Patna | CSDA 2nd Semester
 
+## 🚀 Live Demo
+**[Click Here to View AQI Predictor](https://ea440f0b-da3d-41c2-9a06-7e1463e985e8-00-1vqlqe03nb67.pike.replit.dev/)**
+
+> **Note:** This project is hosted on Replit's free tier. The server goes to sleep after 30 minutes of inactivity.  
+> If the website doesn't open or shows "waking up", please wait 10-15 seconds and refresh the page.  
+> **If it still doesn't work, contact Ishan to restart the Replit server.**
+
 ## 🎥 Project Demo Video
 **[▶ Watch AQI Predictor Demo](https://www.image2url.com/r2/default/videos/1778306488434-e1809e36-668c-4715-b38c-4bb1c41caf9b.mp4)**
 
