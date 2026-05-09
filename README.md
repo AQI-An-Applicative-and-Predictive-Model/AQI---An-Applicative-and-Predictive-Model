@@ -79,7 +79,8 @@ System tested successfully on multiple Indian cities. Screenshots below show act
 **Description**: 30-day historical trends with 3-day future forecast. Solid lines = actual data, Dashed lines = ML prediction for PM10, PM2.5. Model captures non-linear patterns.
 
 ### Screenshot 4: Calendar Heatmap - Mumbai
-[Add Screenshot Here]  
+<img width="1600" height="762" alt="WhatsApp Image 2026-05-04 at 2 40 35 PM (1)" src="https://github.com/user-attachments/assets/569c2826-5dff-40a7-877d-2f149f883eeb" />
+
 **Description**: May 2026 monthly AQI view using CPCB official colors. Each day color-coded: Green to Maroon. Helps users plan travel on safer days. Proves multi-city support.
 
 ### Screenshot 5: Email Alert System
