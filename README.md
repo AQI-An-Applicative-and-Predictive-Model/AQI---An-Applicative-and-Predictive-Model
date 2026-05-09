@@ -74,7 +74,8 @@ System tested successfully on multiple Indian cities. Screenshots below show act
 **Description**: Real-time dashboard showing AQI 111 Moderate with Orange color. Displays PM10, PM2.5, Ozone values with health advisory. Date picker and email subscription visible.
 
 ### Screenshot 3: ML Prediction Graphs
-[Add Screenshot Here]  
+<img width="1600" height="759" alt="WhatsApp Image 2026-05-09 at 8 59 09 AM" src="https://github.com/user-attachments/assets/bec33dfc-58c8-45b4-8aad-f70399efb5ba" />
+
 **Description**: 30-day historical trends with 3-day future forecast. Solid lines = actual data, Dashed lines = ML prediction for PM10, PM2.5. Model captures non-linear patterns.
 
 ### Screenshot 4: Calendar Heatmap - Mumbai
