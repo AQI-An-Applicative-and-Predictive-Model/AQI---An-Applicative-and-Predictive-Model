@@ -64,7 +64,8 @@ User → Frontend → Flask → Python Backend → CSV + ML Model
 System tested successfully on multiple Indian cities. Screenshots below show actual working output.
 
 ### Screenshot 1: Homepage - City Selection
-[Add Screenshot Here]  
+<img width="1600" height="763" alt="WhatsApp Image 2026-05-04 at 2 40 33 PM (3)" src="https://github.com/user-attachments/assets/e78eaf97-2c25-43cd-b990-7dbc2fb56de6" />
+
 **Description**: Clean dark theme interface with search bar and 20 city cards. User can select any city to view live AQI data.
 
 ### Screenshot 2: Live Dashboard - New Delhi  
