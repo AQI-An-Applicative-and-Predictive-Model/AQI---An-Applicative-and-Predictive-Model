@@ -69,7 +69,8 @@ System tested successfully on multiple Indian cities. Screenshots below show act
 **Description**: Clean dark theme interface with search bar and 20 city cards. User can select any city to view live AQI data.
 
 ### Screenshot 2: Live Dashboard - New Delhi  
-[Add Screenshot Here]  
+<img width="1600" height="769" alt="WhatsApp Image 2026-05-04 at 2 40 33 PM (2)" src="https://github.com/user-attachments/assets/58e8c4f1-7967-4c0e-b450-eff0178adb19" />
+
 **Description**: Real-time dashboard showing AQI 111 Moderate with Orange color. Displays PM10, PM2.5, Ozone values with health advisory. Date picker and email subscription visible.
 
 ### Screenshot 3: ML Prediction Graphs
