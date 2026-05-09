@@ -3,7 +3,14 @@
 
 Capstone Project | Group 188 | IIT Patna | CSDA 2nd Semester
 
-**Live Demo**: 
+## 🎥 Project Demo Video
+**[▶ Watch AQI Predictor Demo](https://www.image2url.com/r2/default/videos/1778306488434-e1809e36-668c-4715-b38c-4bb1c41caf9b.mp4)**
+
+**Video covers:**
+1. Project overview + home page UI
+2. Live AQI prediction for multiple cities
+3. 7-day trend graph visualization
+4. Tech stack used: Flask + Pandas + Matplotlib
 
 ## Problem Statement
 Air pollution is India's silent health crisis with no future visibility in existing apps.
