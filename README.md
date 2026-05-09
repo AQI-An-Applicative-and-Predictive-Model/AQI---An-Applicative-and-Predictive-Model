@@ -84,7 +84,8 @@ System tested successfully on multiple Indian cities. Screenshots below show act
 **Description**: May 2026 monthly AQI view using CPCB official colors. Each day color-coded: Green to Maroon. Helps users plan travel on safer days. Proves multi-city support.
 
 ### Screenshot 5: Email Alert System
-[Add Screenshot Here]  
+<img width="720" height="758" alt="WhatsApp Image 2026-05-08 at 6 36 09 PM (1)" src="https://github.com/user-attachments/assets/6544284d-742b-46b4-9014-e0630f2513c6" />
+
 **Description**: Automated Gmail alert triggered when AQI > 200. Contains city name, current AQI, health category, precautions, and dashboard link. System fully operational.
 
 **Key Result Summary:**
